@@ -1,14 +1,12 @@
-<%@page import="board.model.MybatisBoardDAO"%>
-<%@page import="board.model.Board"%>
+<%@page import="com.webapp1216.board.model.Notice"%>
+<%@page import="com.webapp1216.board.model.NoticeDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="common.board.Pager"%>
-<%@page import="board.model.BoardDAO"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
-	/* BoardDAO dao=new BoardDAO(); */
-	MybatisBoardDAO dao=new MybatisBoardDAO();
+	//jsp에서는 이미 내장객체로 지원되기 때문에 session을 사용
+	List list=(List)session.getAttribute("noticeList");
 	Pager pager=new Pager();
-	List<Board> list=dao.selectAll();
 	pager.init(request, list);//페이지 처리에 대한 계산
 %>
 <!DOCTYPE html>
@@ -37,7 +35,6 @@ tr:nth-child(even) {
 	<table>
 		<tr>
 			<th>No</th>
-			<th>이미지</th>
 			<th>제목</th>
 			<th>작성자</th>
 			<th>등록일</th>
@@ -47,16 +44,15 @@ tr:nth-child(even) {
 		<%int curPos=pager.getCurPos(); %>
 		<%for(int i=1;i<=pager.getPageSize();i++){ %>
 		<%if(num<1)break; %>
-		<%Board board=list.get(curPos++); %>
+		<%Notice notice=(Notice)list.get(curPos++);%>
 		<tr>
 			<td><%=num-- %></td>
-			<td><img src="/data/<%=board.getFilename()%>" width="50px"></td>
-			<td><a href="/board/detail.jsp?board_id=<%=board.getBoard_id()%>"><%=board.getTitle()%></a></td>
-			<td><%=board.getWriter()%></td>
-			<td><%=board.getRegdate()%></td>
-			<td><%=board.getHit()%></td>
+			<td><a href="/board/detail?notice_id=<%=notice.getNotice_id()%>"><%=notice.getTitle()%></a></td>
+			<td><%=notice.getWriter()%></td>
+			<td><%=notice.getRegdate()%></td>
+			<td><%=notice.getHit()%></td>
 		</tr>
-		<%} %>
+		<%}%> 
 		<tr>
 			<td colspan="6" style="text-align:center">
 				[1][2][3]
@@ -68,6 +64,5 @@ tr:nth-child(even) {
 			</td>
 		</tr>
 	</table>
-
 </body>
 </html>

@@ -20,8 +20,17 @@
 		//관리자 정보를 vo에 담자
 		admin.setMid(mid);
 		admin.setPassword(password);
-		response.sendRedirect("/admin/index.jsp?admin="+admin);//클라이언트로 하여금 지정한 url로 요청을 시도하게끔 하는 기능
 		
+		//jsp의 내장객체인 session객체는 클라이언트가 신규접속이라고 생각할때, 새로운 session인스턴스를 생성하고
+		//세션 아이디도 생성하여, 세션에 부여한다.
+		//이 세션은 클라이언트가 브라우저를 종료하지 않거나 일정시간내에 재접속을 할 경우 계속 사용할 수 있다.
+		//따라서 웹은 stateless 기반이지만 서버측 메모리에 생성된 세션을 이용하면 마치 연결이 유지된 것처럼 보여질 수 있다.
+		//주 용도)로그인 후 회원정보를 모든 페이지에서 사용할 수 있는 기능, 장바구니 등에 사용
+		session.setAttribute("ad", admin);
+		
+		System.out.println("로그인 요청시 사용중인 세션은"+session);
+		
+		response.sendRedirect("/admin/index.jsp");//클라이언트로 하여금 지정한 url로 요청을 시도하게끔 하는 기능
 	}else{
 		//로그인 실패에 대한 욕
 		out.print(getMsgBack("로그인 실패"));
