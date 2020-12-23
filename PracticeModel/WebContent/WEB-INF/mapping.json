@@ -1,0 +1,14 @@
+{
+	"controller":{
+		"/notice/list.do":"com.PracticeModel.notice.controller.ListController",
+		"/notice/regist.do":"com.PracticeModel.notice.controller.RegistController",
+		"/notice/detail.do":"com.PracticeModel.notice.controller.DetailController"
+		
+	},
+	
+	"view":{
+		"/view/notice/list":"/notice/list.jsp",
+		"/view/notice/regist":"/notice/list.do",
+		"/view/notice/detail":"/notice/detail.jsp"
+	}
+}

@@ -4,20 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="board.model.Board" alias="Board"/>
+		<typeAlias type="com.board1216.board.model.Notice2" alias="Notice2" />
 	</typeAliases>
-	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="JNDI">
 				<property name="data_source"
-					value="java:comp/env/jdbc/myoracle" />
+					value="java:/comp/env/jdbc/mysql" />
 			</dataSource>
 		</environment>
 	</environments>
-	
 	<mappers>
-		<mapper resource="mybatis/mappers/BoardMapper.xml" />
+		<mapper
+			resource="com/board1216/mybatis/mapper/BoardMapper2.xml" />
 	</mappers>
 </configuration>
